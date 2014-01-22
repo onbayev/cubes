@@ -1,0 +1,30 @@
+#!/bin/sh
+
+export PGPASSWORD=@nnihilation2013
+/opt/PostgresPlus/9.2AS/bin/psql -h 10.254.0.225 -U kudos_adm -p 5432 kudos <<EDD
+INSERT INTO  pre_cube_mark
+     SELECT
+	 CAST(g.type_ as "char")		      "school_type", 
+	 CAST(getrootregion(g.region_) as integer) "district",
+	 CAST(getregion(g.region_) as integer)     "region",
+	 CAST(g.name_ as varchar(20))		      "school",
+	 CAST(pr.value_ as smallint)		      "level",
+	 CAST(cl.name_ as varchar(20))		      "class",
+	 CAST(p.order_ as smallint)	              "period",
+	 CAST(p.year_ as smallint)		      "year",
+	 CAST(c.subject_id as integer)	      "subject",
+	 CAST(t.hours_ as SMALLINT)					"hours",
+	 CAST(lt.id_ as SMALLINT) 	"assigned",
+     CAST(l.week_ as SMALLINT)	"week"
+	FROM cs_course c
+		JOIN sl_course_topic ct on (ct.id_ = c.id_)
+		JOIN sl_topic t on (t.topic_id_ = ct.topic_id_)
+		LEFT JOIN sl_lesson_topic lt on (lt.topic_id_ = t.topic_id_)
+		LEFT JOIN ls_lesson l on (l.id_ = lt.id_)
+		JOIN sm_period p ON (p.id_ = c.period_)
+		JOIN wx_group g  ON (g.name_  = p.school_)
+		JOIN wx_group cl ON (cl.name_ = c.group_name_)
+		JOIN wx_property pr ON (pr.properties_ = cl.properties_ )
+	WHERE p.year_ = 2013
+	AND pr.key_ = 'level';
+EDD

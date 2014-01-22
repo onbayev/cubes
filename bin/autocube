@@ -1,0 +1,14 @@
+#!/bin/sh
+DIR=~/cubes
+while [ `ls $DIR/queue|wc -l` -gt 0 ]
+do
+FILE=`ls $DIR/queue/ | tail -n 1`
+if mv $DIR/queue/$FILE $DIR/.tmpauto
+then	
+    $DIR/.tmpauto/$FILE >> $DIR/autocube.log
+    echo  "$FILE" >> $DIR/autocube.log
+else
+    echo "fail " >> $DIR/autocube.log
+fi
+done
+#rm -rf .tmp$1

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+for n in {1..60}; do
+    cp group grouphours/grouphours$n
+done

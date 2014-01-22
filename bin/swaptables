@@ -1,0 +1,21 @@
+#!/bin/sh
+
+export PGPASSWORD=@nnihilation2013
+
+/opt/PostgresPlus/9.2AS/bin/psql -h 10.254.0.225 -U kudos_adm -p 5432 kudos  <<EDD
+ALTER TABLE cube_hours RENAME TO cube_hours3;
+ALTER TABLE cube_hours2 RENAME TO cube_hours;
+ALTER TABLE cube_hours3 RENAME TO cube_hours2;
+
+ALTER TABLE cube_mark RENAME TO cube_mark3;
+ALTER TABLE cube_mark2 RENAME TO cube_mark;
+ALTER TABLE cube_mark3 RENAME TO cube_mark2;
+
+ALTER TABLE cube_att RENAME TO cube_att3;
+ALTER TABLE cube_att2 RENAME TO cube_att;
+ALTER TABLE cube_att3 RENAME TO cube_att2;
+
+ALTER TABLE cube_topic RENAME TO cube_topic3;
+ALTER TABLE cube_topic2 RENAME TO cube_topic;
+ALTER TABLE cube_topic3 RENAME TO cube_topic2;
+EDD

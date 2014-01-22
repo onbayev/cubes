@@ -1,0 +1,18 @@
+#!/bin/sh
+
+DIR=~/cubes
+mkdir $DIR/.tmpauto
+echo '' > $DIR/autocube.log
+echo "`date` Autocube V.1.1. All Right reserved by LLP Bee Software" > $DIR/autocube.log
+echo "--------------------------------------------------------" >> $DIR/autocube.log
+echo "Pre Cube data generation" >> $DIR/autocube.log
+echo "`date` Trucating tables" >> $DIR/autocube.log
+
+$DIR/bin/truncatetables
+
+echo "`date` Preparing data (it can take a while)" >> $DIR/autocube.log
+
+setsid $DIR/tables/precubeatt 
+setsid $DIR/tables/precubehours 
+setsid $DIR/tables/precubemark 
+setsid $DIR/tables/precubetopic

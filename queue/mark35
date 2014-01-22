@@ -1,0 +1,8 @@
+#!/bin/sh
+
+export PGPASSWORD=@nnihilation2013
+
+/opt/PostgresPlus/9.2AS/bin/psql -h 10.254.0.225 -U kudos_adm -p 5432 kudos  <<EDD
+INSERT INTO cube_mark2
+select school_type,district,null,null,null,null,year,null,null,subject,	count(*) total,sum(mark),count(CASE WHEN mark = 5 THEN 1 ELSE null END) five,count(CASE WHEN mark = 4 THEN 1 ELSE null END) four,count(CASE WHEN mark = 3 THEN 1 ELSE null END) three,count(CASE WHEN mark = 2 THEN 1 ELSE null END) two from pre_cube_mark group by school_type,district,year,subject;
+EDD

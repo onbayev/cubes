@@ -1,0 +1,8 @@
+#!/bin/sh
+
+export PGPASSWORD=@nnihilation2013
+
+/opt/PostgresPlus/9.2AS/bin/psql -h 10.254.0.225 -U kudos_adm -p 5432 kudos  <<EDD
+TRUNCATE pre_cube_att, pre_cube_hours, pre_cube_mark, pre_cube_topic;
+TRUNCATE cube_hours2, cube_mark2, cube_att2, cube_topic2;
+EDD

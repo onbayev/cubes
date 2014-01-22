@@ -1,0 +1,8 @@
+#!/bin/sh
+
+export PGPASSWORD=@nnihilation2013
+
+/opt/PostgresPlus/9.2AS/bin/psql -h 10.254.0.225 -U kudos_adm -p 5432 kudos  <<EDD
+INSERT INTO cube_topic2
+select school_type,null,null,null,null,null,year,null,null,subject,count(*) total,sum(hours) totalhours,count(CASE WHEN assigned IS NOT NULL THEN 1 ELSE NULL END) assigned from pre_cube_topic group by school_type,year,subject;
+EDD

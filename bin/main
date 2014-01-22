@@ -1,0 +1,25 @@
+#!/bin/sh
+DIR=~/cubes
+mkdir $DIR/.tmpauto
+echo '' > $DIR/autocube.log
+echo "`date` Autocube V.1.1. All Right reserved by LLP Bee Software" > $DIR/autocube.log
+echo "--------------------------------------------------------" >> $DIR/autocube.log
+
+#echo "`date` Trucating tables" >> $DIR/autocube.log
+
+#$DIR/bin/truncatetables
+
+#echo "`date` Preparing data (it can take a while)" >> $DIR/autocube.log
+
+#$DIR/tables/precubeatt & $DIR/tables/precubehours & $DIR/tables/precubemark & $DIR/tables/precubetopic
+
+echo "`date` Generating cubes" >> $DIR/autocube.log
+
+parallel -j 16 $DIR/bin/autocube -- 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+
+echo "`date` Swaping tables" >> $DIR/autocube.log
+
+$DIR/bin/swaptables
+
+echo '--------------------------------------------------------' >> $DIR/autocube.log
+echo "`date` Finished." >> $DIR/autocube.log

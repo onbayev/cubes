@@ -1,0 +1,8 @@
+#!/bin/sh
+
+export PGPASSWORD=@nnihilation2013
+
+/opt/PostgresPlus/9.2AS/bin/psql -h 10.254.0.225 -U kudos_adm -p 5432 kudos  <<EDD
+INSERT INTO cube_att2
+select school_type,district,region,null,null,level,year,null,null,null,count(*) total,count(CASE WHEN present THEN null ELSE 1 END) absent,count(CASE WHEN late THEN 1 ELSE null END) as late from pre_cube_att group by school_type,district,region,level,year;
+EDD

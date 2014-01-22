@@ -1,0 +1,29 @@
+#!/bin/sh
+DIR=~/cubes
+counter=0
+while read line ;do
+   counter=$(( $counter + 1 ))
+   cp $DIR/templates/hoursgroup $DIR/queue/hours$counter
+   sed -i "s/###/$line/g" $DIR/queue/hours$counter
+done < "$DIR/tasks/hours"
+
+counter=0
+while read line ;do
+   counter=$(( $counter + 1 ))
+   cp $DIR/templates/attgroup $DIR/queue/att$counter
+   sed -i "s/###/$line/g" $DIR/queue/att$counter
+done < "$DIR/tasks/att"
+
+counter=0
+while read line ;do
+   counter=$(( $counter + 1 ))
+   cp $DIR/templates/markgroup $DIR/queue/mark$counter
+   sed -i "s/###/$line/g" $DIR/queue/mark$counter
+done < "$DIR/tasks/marks"
+
+counter=0
+while read line ;do
+   counter=$(( $counter + 1 ))
+   cp $DIR/templates/topicsgroup $DIR/queue/topic$counter
+   sed -i "s/###/$line/g" $DIR/queue/topic$counter
+done < "$DIR/tasks/topics"
